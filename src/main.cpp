@@ -1,50 +1,5 @@
-//
-// CommandCam - A command line image grabber
-// Copyright (C) 2012 Ted Burke
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with this program (see the file "COPYING").
-// If not, see <http://www.gnu.org/licenses/>.
-// 
-// Website: http://batchloaf.wordpress.com
-//
-// To compile using the MSVC++ compiler:
-//
-//		cl CommandCam.cpp ole32.lib strmiids.lib oleaut32.lib
-//
-// Last modified 21-4-2012
-//
-
-// DirectShow header file
 #include <dshow.h>
-
-// This is a workaround for the missing header
-// file qedit.h which seems to be absent from the
-// Windows SDK versions 7.0 and 7.1.
-// To use the items defined in this dll, the
-// DexterLib namespace must be specified.
-// The items in question are:
-//
-//		DexterLib::_AMMediaType
-//		DexterLib::ISampleGrabber
-//		DexterLib::IID_ISampleGrabber
-//
 #import "qedit.dll" raw_interfaces_only named_guids
-
-// For some reason, these are not included in the
-// DirectShow headers. However, they are exported
-// by strmiids.lib, so I'm just declaring them
-// here as extern.
 EXTERN_C const CLSID CLSID_NullRenderer;
 EXTERN_C const CLSID CLSID_SampleGrabber;
 
@@ -105,20 +60,6 @@ int main(int argc, char **argv)
 	// Default device name and output filename
 	strcpy(device_name, "");
 	strcpy(filename, "image.bmp");
-	
-	// Information message
-	fprintf(stderr, "\n");
-	fprintf(stderr, "CommandCam  Copyright (C) 2012  Ted Burke\n");
-    fprintf(stderr, "This program comes with ABSOLUTELY NO WARRANTY;\n");
-    fprintf(stderr, "This is free software, and you are welcome to\n");
-    fprintf(stderr, "redistribute it under certain conditions;\n");
-	fprintf(stderr, "See the GNU General Public License v3,\n");
-	fprintf(stderr, "<http://www.gnu.org/licenses/gpl.txt>\n");
-	fprintf(stderr, "\n");
-	fprintf(stderr, "http://batchloaf.wordpress.com\n");
-	fprintf(stderr, "This version 21-4-2012\n");
-	fprintf(stderr, "\n");
-	
 	// Parse command line arguments. Available options:
 	//
 	//		/delay DELAY_IN_MILLISECONDS
